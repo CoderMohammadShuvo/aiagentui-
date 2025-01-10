@@ -1,7 +1,50 @@
+
 // This event listener toggles the "collapsed" class on the sidebar element when the toggle button is clicked.
 // The "collapsed" class reduces the sidebar's width, allowing for a more compact view.
 document.getElementById('toggle-btn').addEventListener('click', function () {
-  document.getElementById('sidebar').classList.toggle('collapsed');
+  document.getElementById('sidebarChat').classList.toggle('collapsed');
+});
+const sidebar = document.getElementById('sidebar');
+  const toggleSidebar = document.getElementById('toggleSidebar');
+
+  toggleSidebar.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+  });
+
+function showUploadPopup() {
+  document.getElementById("uploadPopup").classList.remove("hidden");
+  document.getElementById("overlay").classList.remove("hidden");
+}
+
+function closeUploadPopup() {
+  document.getElementById("uploadPopup").classList.add("hidden");
+  document.getElementById("overlay").classList.add("hidden");
+}
+
+function handleFileSelect(event) {
+  const files = event.target.files;
+  console.log("Selected files:", files);
+  // Handle the selected files here
+}
+
+// Drag and drop functionality
+const dropZone = document.getElementById("dropZone");
+
+dropZone.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  dropZone.style.background = "#f0f8ff";
+});
+
+dropZone.addEventListener("dragleave", () => {
+  dropZone.style.background = "white";
+});
+
+dropZone.addEventListener("drop", (e) => {
+  e.preventDefault();
+  dropZone.style.background = "white";
+  const files = e.dataTransfer.files;
+  console.log("Dropped files:", files);
+  // Handle the dropped files here
 });
 
 document.getElementById('openai-api-form').addEventListener('submit', function(event) {
@@ -14,6 +57,10 @@ document.getElementById('openai-api-form').addEventListener('submit', function(e
       alert('Please enter your API key.');
   }
 });
+
+
+
+
 
 function sendMessage() {
   const message = document.getElementById('chatbot-input').value.trim();
